@@ -34,7 +34,6 @@ const App = () => {
         />
         <Stack.Screen name="Register" component={SignUp} options = {{headerShown : false}}/>
         <Stack.Screen name="Home" component={List} 
-        options = {{headerShown : false}}
         />
 
       </Stack.Navigator>
