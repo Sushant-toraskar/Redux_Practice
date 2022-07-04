@@ -9,9 +9,13 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import InputComponent from '../assets/InputComponent';
+import { useDispatch } from 'react-redux';
+import {GET_USER} from '../../Redux/action'
+
+import InputComponent from '../customComponents/InputComponent';
 const Register = ({navigation}) => {
   const [name, setName] = useState('');
+  const dispatch = useDispatch();
   const [formValues, setFormValues] = useState({
     fname: '',
     lname: '',
@@ -78,6 +82,7 @@ const Register = ({navigation}) => {
               onPress={() => {
                 navigation.navigate('Home');
                 console.log('',formValues);
+                dispatch({type:GET_USER,payload : formValues})
               }}
               style={{
                 backgroundColor: 'skyblue',

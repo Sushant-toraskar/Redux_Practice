@@ -9,7 +9,7 @@ import {
     TouchableOpacity
   } from 'react-native';
 
-  import InputComponent from '../assets/InputComponent';
+  import InputComponent from '../customComponents/InputComponent';
   const Login = ({navigation}) => {
   const [name,setName] = useState('')
 
