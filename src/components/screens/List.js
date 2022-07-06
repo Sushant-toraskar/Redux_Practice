@@ -53,8 +53,18 @@ function List({navigation}) {
       />
 
       <View>
-        <TouchableOpacity onPress={() => dispatch({type:CLEAR_STORAGE})}>
-          <Text>Clear Storage</Text>
+        <TouchableOpacity
+        style={{
+          borderWidth :1,
+          padding : 5
+        }}
+        onPress={() => dispatch({type:CLEAR_STORAGE})}>
+          <Text style = {
+            {
+              fontSize : 20,
+              fontWeight : '300'
+          
+          }}>Clear Storage</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
