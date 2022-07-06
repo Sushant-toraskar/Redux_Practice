@@ -1,37 +1,62 @@
 import React from 'react';
-import {SafeAreaView, View, Text,TouchableOpacity} from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+} from 'react-native';
 import {store} from '../../Redux/store';
 
 import {useSelector} from 'react-redux';
+import Details from './Details';
+import { useDispatch } from 'react-redux';
+import {CLEAR_STORAGE} from '../../Redux/action'
 
-function List() {
+function List({navigation}) {
   const state = useSelector(state => state);
   console.log('List data : ', store.getState().user.data[0]);
   const Users = store.getState()?.user?.data;
+  const dispatch = useDispatch()
   return (
     <SafeAreaView
       style={{
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
       }}>
+      <FlatList
+      style = {{
+        width : '90%',
+        padding : 'auto'
 
-        {
-          Users.map((user,index) =>{
-            return(
-              <TouchableOpacity key={index}
-        style={{
-          height: 50,
-          width: '90%',
-          borderWidth: 1,
-          marginTop: '5%',
-        }}>
-        <Text>{user.fname+ " " + user.lname}</Text>
-      </TouchableOpacity>
-            )
-          })
-        }
+      }}
+        data={Users}
+        keyExtractor={item => item.fname.toString()}
+        renderItem={item => {
+          return (
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Details', item.item)}
+              style={{
+                height: 50,
+                width: '100%',
+                borderWidth: 1,
+                marginTop: '5%',
+                backgroundColor: 'red',
+                justifyContent : 'center',
+                alignItems:'center'
+              }}>
+              <Text>{item.item.fname} {item.item.lname}</Text>
+            </TouchableOpacity>
+          );
+        }}
+      />
 
-      
+      <View>
+        <TouchableOpacity onPress={() => dispatch({type:CLEAR_STORAGE})}>
+          <Text>Clear Storage</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 }
